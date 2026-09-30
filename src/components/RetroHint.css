@@ -1,0 +1,90 @@
+.retro-hint {
+    position: relative;
+    display: inline-block;
+}
+
+.retro-hint__link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--accent-primary);
+    font: inherit;
+    font-size: 0.78rem;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: help;
+}
+
+.retro-hint__link:focus-visible {
+    outline: 2px dotted var(--accent-primary);
+    outline-offset: 2px;
+}
+
+.retro-window {
+    position: absolute;
+    top: calc(100% + 8px);
+    inset-inline-start: 0;
+    z-index: 70;
+    display: block;
+    width: min(360px, 86vw);
+    background: var(--bg-card, var(--bg-secondary));
+    color: var(--text-primary);
+    border: 2px solid var(--text-primary);
+    box-shadow: 5px 5px 0 var(--text-primary);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    animation: retro-pop 0.12s steps(3, end);
+}
+
+@keyframes retro-pop {
+    from { transform: translate(-4px, -4px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .retro-window { animation: none; }
+}
+
+.retro-window__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 3px 6px;
+    background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(255, 255, 255, 0.14) 2px 3px), linear-gradient(90deg, var(--accent-primary), var(--accent-cyan, var(--accent-primary)));
+    color: #fff;
+    border-bottom: 2px solid var(--text-primary);
+}
+
+.retro-window__title {
+    font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.retro-window__btns {
+    display: flex;
+    gap: 3px;
+}
+
+.retro-window__btns i {
+    width: 10px;
+    height: 10px;
+    background: var(--bg-card, #fff);
+    border: 1.5px solid var(--text-primary);
+}
+
+.retro-window__body {
+    display: block;
+    padding: 10px 12px 12px;
+}
+
+.retro-window__body ul {
+    margin: 0;
+    padding-inline-start: 1.1rem;
+}
+
+.retro-window__body li + li {
+    margin-top: 4px;
+}

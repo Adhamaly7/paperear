@@ -1,0 +1,84 @@
+/* PageOverlay — real-page canvas + transparent word-box highlight layer */
+
+.page-overlay {
+    position: relative;
+    margin: 0 auto;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+    border-radius: 4px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.page-overlay__canvas {
+    display: block;
+}
+
+.page-overlay__boxes {
+    position: absolute;
+    inset: 0;
+}
+
+.page-overlay__word {
+    position: absolute;
+    border-radius: 3px;
+    cursor: pointer;
+    /* invisible until current/skipped — the document itself is the UI */
+    background: transparent;
+}
+
+/* The tint lives on ::before so it can blend with the page while the
+   contrast ring on the element itself never blends away. Multiply on
+   light pages keeps glyphs fully dark; screen on dark pages lightens
+   the paper behind the glyphs instead. */
+.page-overlay__word::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    background: transparent;
+    mix-blend-mode: multiply;
+    transition: background-color 120ms ease;
+}
+
+.page-overlay--dark .page-overlay__word::before {
+    mix-blend-mode: screen;
+}
+
+.page-overlay__word:hover::before {
+    background: var(--overlay-hover, rgba(99, 102, 241, 0.14));
+}
+
+/* The current word is the page's own ink, inverted in place: the box
+   flips the pixels beneath it, so the printed glyphs turn white on a
+   dark ground — the real word, never a re-rendering, on any page. */
+/* The current word is recoloured pixel-by-pixel on its own small canvas
+   (ink → white, paper → theme colour); the word span itself draws nothing. */
+.page-overlay__hl {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+}
+
+.page-overlay__word.is-current::before {
+    display: none;
+}
+
+.page-overlay__word.is-skipped {
+    cursor: default;
+    box-shadow: inset 0 0 0 1px var(--overlay-skip-edge, rgba(215, 38, 56, 0.18));
+}
+
+.page-overlay__word.is-skipped::before {
+    background: var(--overlay-skip, rgba(215, 38, 56, 0.16));
+}
+
+/* One continuous strike per line of skipped words (rendered separately —
+   per-word dashes misalign and glitch). */
+.page-overlay__strike {
+    position: absolute;
+    height: 0;
+    border-top: 2px solid var(--overlay-skip-line, rgba(215, 38, 56, 0.85));
+    pointer-events: none;
+}

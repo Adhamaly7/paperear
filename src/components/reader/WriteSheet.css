@@ -1,0 +1,119 @@
+.write-sheet {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.write-sheet__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 8px;
+    border: 1px solid var(--border-default);
+    border-bottom: none;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    background: var(--bg-secondary);
+}
+
+.write-sheet__group {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding-inline-end: 8px;
+    margin-inline-end: 8px;
+    border-inline-end: 1px solid var(--border-subtle);
+}
+
+.write-sheet__btn {
+    width: 30px;
+    height: 26px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.write-sheet__btn:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.write-sheet__select {
+    height: 26px;
+    padding: 0 8px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-input);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-secondary);
+    font-size: 0.73rem;
+    min-width: 76px;
+    margin-inline-end: 8px;
+}
+
+.write-sheet__count {
+    margin-inline-start: auto;
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+}
+
+.write-sheet__count--warn {
+    color: var(--warning);
+}
+
+.write-sheet__read {
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--accent-primary);
+    color: var(--text-inverse);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.write-sheet__read:hover {
+    background: var(--accent-hover);
+}
+
+.write-sheet__page {
+    min-height: calc(100dvh - var(--dock-h, 150px) - 140px);
+    padding: var(--space-10) var(--space-12);
+    background: var(--bg-card, var(--bg-secondary));
+    border: 1px solid var(--border-default);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    outline: none;
+    color: var(--text-primary);
+    font-family: var(--font-reading, var(--font-body));
+    font-size: 1.05rem;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.write-sheet__page:empty::before {
+    content: attr(data-placeholder);
+    color: var(--text-tertiary);
+    pointer-events: none;
+    display: block;
+}
+
+.write-sheet__page h1 { font-size: 1.6rem; font-weight: 700; margin: 0.5em 0 0.25em; }
+.write-sheet__page h2 { font-size: 1.25rem; font-weight: 600; margin: 0.5em 0 0.25em; }
+.write-sheet__page h3 { font-size: 1.05rem; font-weight: 600; margin: 0.5em 0 0.25em; }
+.write-sheet__page ul,
+.write-sheet__page ol { padding-inline-start: 1.5em; margin: 0.25em 0; }
+.write-sheet__page li { margin: 0.15em 0; }
+.write-sheet__page p { margin: 0.3em 0; }
+
+.write-sheet__note {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--accent-text);
+}
+
+@media (max-width: 768px) {
+    .write-sheet__page {
+        padding: var(--space-6) var(--space-4);
+    }
+}

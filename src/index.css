@@ -1,0 +1,283 @@
+﻿/* ============================================
+   Paperear design system — thematic engine
+   Supports: Midnight (Default), Paper (Light), Dusk (Soft)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+/* ------------------------------------------------------------------
+   THEME: MIDNIGHT (Default / OLED / Electric)
+   ------------------------------------------------------------------ */
+:root, [data-theme="midnight"] {
+  /* Surface colors */
+  --bg-primary: #0A0A0F;
+  --bg-secondary: #12121A;
+  --bg-tertiary: #1A1A25;
+  --bg-hover: #22222E;
+  --bg-active: #2A2A38;
+  --bg-input: rgba(255, 255, 255, 0.05);
+
+  /* Accent — Electric Indigo */
+  --accent-primary: #6366F1;
+  --accent-hover: #818CF8;
+  --accent-muted: rgba(99, 102, 241, 0.15);
+  --accent-glow: rgba(99, 102, 241, 0.25);
+  --accent-strong: #4F46E5;
+  --accent-text: #6366F1;
+
+  /* Text hierarchy */
+  --text-primary: #F0F0F5;
+  --text-secondary: #A0A0B0;
+  --text-tertiary: #606070;
+  --text-inverse: #0A0A0F;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --border-active: rgba(99, 102, 241, 0.5);
+
+  /* Highlight Logic */
+  --highlight-current-bg: linear-gradient(120deg, #6366F1, #4F46E5);
+  --highlight-current-text: #FFFFFF;
+  --highlight-read-bg: rgba(34, 197, 94, 0.1);
+  --highlight-read-text: #4ADE80;
+
+  /* Document overlay — tint on the real page, matches accent */
+  --overlay-current: rgba(99, 102, 241, 0.30);
+  --overlay-current-ring: rgba(79, 70, 229, 0.45);
+  --overlay-current-dark: rgba(165, 180, 252, 0.30);
+  --overlay-current-ring-dark: rgba(199, 210, 254, 0.9);
+  --overlay-current-veil: #4F46E5;
+  --overlay-hover: rgba(99, 102, 241, 0.14);
+
+  /* Physics */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-color: 0, 0, 0;
+  --font-body: 'Figtree', 'Inter', system-ui, sans-serif;
+  --font-reading: 'Inter', sans-serif;
+  --bg-card: #12121A;
+  --wash-ink: linear-gradient(135deg, rgba(99, 102, 241, 0.16) 0%, rgba(56, 189, 248, 0.14) 100%);
+  --wash-ink-strong: linear-gradient(135deg, #3730A3 0%, #155E75 100%);
+}
+
+/* ------------------------------------------------------------------
+   THEME: PAPER (Light / Warm / Soft / Book)
+   ------------------------------------------------------------------ */
+[data-theme="paper"] {
+  --bg-primary: #F7F8FA;
+  --bg-secondary: #EEF1F5;
+  --bg-tertiary: #E2E7EE;
+  --bg-hover: #E6EBF1;
+  --bg-active: #DAE1EA;
+  --bg-input: rgba(22, 33, 46, 0.04);
+  --bg-card: #FFFFFF;
+
+  --accent-primary: #2563C7;
+  --accent-hover: #1E52A8;
+  --accent-muted: rgba(37, 99, 199, 0.12);
+  --accent-glow: rgba(37, 99, 199, 0.15);
+  --accent-strong: #173F85;
+  --accent-text: #1E52A8;
+  --accent-cyan: #3D95A8;
+  --wash-ink: linear-gradient(135deg, rgba(37, 99, 199, 0.10) 0%, rgba(61, 149, 168, 0.18) 100%);
+  --wash-ink-strong: linear-gradient(135deg, #2B5CB4 0%, #3A8EA3 100%);
+
+  --text-primary: #16212E;
+  --text-secondary: #4B5563;
+  --text-tertiary: #667381;
+  --text-inverse: #FFFFFF;
+
+  --border-subtle: rgba(22, 33, 46, 0.05);
+  --border-default: rgba(22, 33, 46, 0.10);
+  --border-hover: rgba(22, 33, 46, 0.16);
+  --border-active: rgba(37, 99, 199, 0.4);
+
+  --highlight-current-bg: rgba(61, 149, 168, 0.28);
+  --highlight-current-text: #16212E;
+  --highlight-read-bg: rgba(22, 33, 46, 0.03);
+  --highlight-read-text: #4B5563;
+
+  --overlay-current: rgba(61, 149, 168, 0.30);
+  --overlay-current-ring: rgba(37, 99, 199, 0.45);
+  --overlay-current-dark: rgba(125, 196, 212, 0.32);
+  --overlay-current-ring-dark: rgba(199, 230, 240, 0.9);
+  --overlay-current-veil: #2563C7;
+  --overlay-hover: rgba(37, 99, 199, 0.12);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-color: 22, 33, 46;
+  --font-body: 'Figtree', 'Inter', system-ui, sans-serif;
+  --font-reading: 'Lora', Georgia, serif;
+}
+
+/* ------------------------------------------------------------------
+   THEME: DUSK (Soft Dark / Low Contrast / Cozy)
+   ------------------------------------------------------------------ */
+[data-theme="dusk"] {
+  /* Surface colors — Muted Charcoal & Slate */
+  --bg-primary: #23242A;
+  --bg-secondary: #2B2C33;
+  --bg-tertiary: #34353E;
+  --bg-hover: #3E3F4A;
+  --bg-active: #484955;
+  --bg-input: rgba(0, 0, 0, 0.2);
+
+  /* Accent — Lavender / Sage */
+  --accent-primary: #A5B4FC; /* Soft Lavender */
+  --accent-hover: #C7D2FE;
+  --accent-muted: rgba(165, 180, 252, 0.1);
+  --accent-glow: rgba(165, 180, 252, 0.15);
+  --accent-strong: #818CF8;
+  --accent-text: #C7D2FE;
+
+  /* Text hierarchy — Soft White */
+  --text-primary: #E2E2E8;
+  --text-secondary: #9CA3AF;
+  --text-tertiary: #6B7280;
+  --text-inverse: #1F2937;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.12);
+  --border-active: rgba(165, 180, 252, 0.3);
+
+  /* Highlight Logic — Glow */
+  --highlight-current-bg: rgba(165, 180, 252, 0.15);
+  --highlight-current-text: #FFFFFF;
+  --highlight-read-bg: rgba(255, 255, 255, 0.03);
+  --highlight-read-text: #9CA3AF;
+
+  /* Document overlay — tint on the real page, matches accent */
+  --overlay-current: rgba(129, 140, 248, 0.30);
+  --overlay-current-ring: rgba(129, 140, 248, 0.50);
+  --overlay-current-dark: rgba(165, 180, 252, 0.32);
+  --overlay-current-ring-dark: rgba(224, 231, 255, 0.9);
+  --overlay-current-veil: #5B64D8;
+  --overlay-hover: rgba(165, 180, 252, 0.16);
+
+  /* Physics */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-color: 0, 0, 0;
+  --font-body: 'Figtree', 'Inter', system-ui, sans-serif;
+  --font-reading: 'Inter', sans-serif;
+  --bg-card: #2B2C33;
+  --wash-ink: linear-gradient(135deg, rgba(165, 180, 252, 0.12) 0%, rgba(103, 232, 249, 0.10) 100%);
+  --wash-ink-strong: linear-gradient(135deg, #4C4F9C 0%, #2F6F7E 100%);
+}
+
+html[dir="rtl"] {
+  --font-body: 'IBM Plex Sans Arabic', 'Figtree', system-ui, sans-serif;
+}
+
+/* ============================================
+   Global Shared Variables & Reset
+   ============================================ */
+:root {
+  /* Spacing scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --radius-full: 999px;
+
+  /* Common Semantics */
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error: #EF4444;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  min-width: 320px;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ============================================
+   Typography & Elements
+   ============================================ */
+
+#root { min-height: 100vh; }
+
+a {
+  color: var(--accent-text);
+  text-decoration: none;
+  transition: color var(--duration-fast) ease;
+}
+a:hover { color: var(--accent-hover); }
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border: 1px solid var(--border-default);
+}
+
+img { max-width: 100%; display: block; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--border-hover); }
+
+/* Selection */
+::selection {
+  background: var(--accent-muted);
+  color: var(--text-primary);
+}
+

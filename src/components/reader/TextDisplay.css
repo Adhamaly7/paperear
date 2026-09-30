@@ -1,0 +1,305 @@
+/* ============================================
+   PDF Viewer — TextDisplay
+   ============================================ */
+
+/* ---- Outer viewer wrapper ---- */
+.pdf-viewer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-6);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    background: var(--bg-secondary);
+    min-height: 400px;
+}
+
+/* ---- Viewer toolbar header ---- */
+.pdf-viewer-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-5);
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+}
+
+.pdf-viewer-toolbar-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.pdf-viewer-toolbar-title::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    box-shadow: 0 0 6px var(--accent-primary);
+    animation: viewerPulse 2s ease-in-out infinite;
+}
+
+@keyframes viewerPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+.pdf-viewer-hint {
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+/* ---- Scrollable page area ---- */
+.pdf-page-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-8) var(--space-6);
+    background: var(--pdf-area-bg, hsl(220 12% 14%));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-8);
+    max-height: calc(100dvh - var(--dock-h, 150px) - 84px);
+}
+
+/* Theme overrides for page area background */
+:root, [data-theme="midnight"] {
+    --pdf-area-bg: hsl(220 18% 9%);
+    --pdf-page-bg: hsl(220 14% 14%);
+    --pdf-page-text: hsl(220 12% 90%);
+    --pdf-page-text-read: hsl(220 8% 55%);
+    --pdf-highlight-current-bg: linear-gradient(135deg, #6366F1, #4F46E5);
+    --pdf-highlight-current-text: #ffffff;
+    --pdf-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0,0,0,0.4);
+}
+
+[data-theme="paper"] {
+    --pdf-area-bg: hsl(40 20% 82%);
+    --pdf-page-bg: hsl(45 40% 97%);
+    --pdf-page-text: hsl(220 15% 18%);
+    --pdf-page-text-read: hsl(220 8% 55%);
+    --pdf-highlight-current-bg: rgba(88, 105, 218, 0.18);
+    --pdf-highlight-current-text: #2D2D34;
+    --pdf-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0,0,0,0.1);
+}
+
+[data-theme="dusk"] {
+    --pdf-area-bg: hsl(230 12% 14%);
+    --pdf-page-bg: hsl(230 10% 18%);
+    --pdf-page-text: hsl(230 12% 92%);
+    --pdf-page-text-read: hsl(230 8% 55%);
+    --pdf-highlight-current-bg: rgba(165, 180, 252, 0.18);
+    --pdf-highlight-current-text: #FFFFFF;
+    --pdf-shadow: 0 8px 28px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* ---- PDF Page ---- */
+.pdf-page {
+    width: 100%;
+    max-width: 680px;
+    background: var(--pdf-page-bg);
+    border-radius: 4px;
+    box-shadow: var(--pdf-shadow);
+    position: relative;
+    transition: box-shadow var(--duration-normal) ease;
+}
+
+.pdf-page:hover {
+    box-shadow: var(--pdf-shadow), 0 0 0 1px var(--accent-primary);
+}
+
+/* Top and bottom page chrome (subtle gradient) */
+.pdf-page-chrome {
+    height: 20px;
+    border-radius: 4px 4px 0 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.04), transparent);
+    pointer-events: none;
+}
+
+.pdf-page-chrome--bottom {
+    border-radius: 0 0 4px 4px;
+    background: linear-gradient(to top, rgba(0,0,0,0.06), transparent);
+    height: 24px;
+}
+
+/* ---- Page content ---- */
+.pdf-page-content {
+    padding: 40px 56px;
+    font-size: calc(1rem * var(--text-zoom, 1));
+    color: var(--pdf-page-text);
+    line-height: 1.85;
+}
+
+@media (max-width: 640px) {
+    .pdf-page-content { padding: 24px 24px; }
+}
+
+/* ---- Rich HTML content inherits editor formatting ---- */
+.pdf-page-content--rich {
+    font-family: var(--font-reading, var(--font-body));
+    cursor: text;
+    line-height: 1.8;
+}
+
+/* Headings from editor */
+.pdf-page-content--rich h1 { font-size: 1.6em; font-weight: 700; margin: 0.5em 0 0.25em; color: var(--pdf-page-text); }
+.pdf-page-content--rich h2 { font-size: 1.25em; font-weight: 600; margin: 0.5em 0 0.25em; color: var(--pdf-page-text); }
+.pdf-page-content--rich h3 { font-size: 1.05em; font-weight: 600; margin: 0.5em 0 0.25em; color: var(--pdf-page-text); }
+
+/* Paragraphs from editor */
+.pdf-page-content--rich [style*="color"] { color: inherit !important; background-color: transparent !important; }
+
+.pdf-page-content--rich p { margin: 0.3em 0; color: var(--pdf-page-text); }
+.pdf-page-content--rich div { margin-bottom: 0.3em; color: var(--pdf-page-text); }
+
+/* Lists from editor */
+.pdf-page-content--rich ul,
+.pdf-page-content--rich ol { padding-inline-start: 1.5em; margin: 0.25em 0; color: var(--pdf-page-text); }
+.pdf-page-content--rich li { margin: 0.15em 0; }
+
+/* Inline formatting */
+.pdf-page-content--rich strong,
+.pdf-page-content--rich b     { font-weight: 700; }
+.pdf-page-content--rich em,
+.pdf-page-content--rich i     { font-style: italic; }
+.pdf-page-content--rich u     { text-decoration: underline; }
+.pdf-page-content--rich s     { text-decoration: line-through; }
+
+
+/* ---- Paragraphs ---- */
+.pdf-paragraph {
+    margin-bottom: 1.4em;
+    text-indent: 1.6em;
+    font-family: var(--font-reading, 'Lora', serif);
+    font-size: 1em;
+    color: var(--pdf-page-text);
+    text-align: justify;
+}
+
+.pdf-paragraph:first-child {
+    margin-top: 0;
+}
+
+/* ---- Structure-aware blocks (paged PDF / text view) ---- */
+.pdf-block {
+    margin: 0 0 1em;
+    font-family: var(--font-reading, 'Lora', serif);
+    color: var(--pdf-page-text);
+}
+
+.pdf-block--heading {
+    margin: 1.3em 0 0.45em;
+    font-weight: 700;
+    font-size: 1.3em;
+    line-height: 1.35;
+}
+
+/* Contents / index entries — one line each, tightly stacked (no prose indent). */
+.pdf-block--item {
+    margin: 0.15em 0;
+    text-indent: 0;
+}
+
+/* Repeating ad/boilerplate — visible in place, struck through, never read aloud. */
+.pdf-block--chrome {
+    margin: 0.15em 0;
+    text-indent: 0;
+    text-decoration: line-through;
+    opacity: 0.4;
+    cursor: default;
+}
+
+.pdf-block:first-child,
+.pdf-block--heading:first-child {
+    margin-top: 0;
+}
+
+/* ---- Word spans — preserve all original classes ---- */
+.td-word {
+    padding: 2px 4px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all var(--duration-fast) ease;
+    display: inline;
+    color: var(--pdf-page-text);
+}
+
+.td-word:hover {
+    background: rgba(99, 102, 241, 0.12);
+    color: var(--accent-primary);
+}
+
+.td-word--current {
+    background: var(--pdf-highlight-current-bg);
+    color: var(--pdf-highlight-current-text);
+    font-weight: 600;
+    box-shadow: 0 1px 6px var(--accent-glow);
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+.td-word--read {
+    color: var(--pdf-page-text-read);
+}
+
+/* ---- Viewer footer ---- */
+.pdf-viewer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-3) var(--space-5);
+    background: var(--bg-tertiary);
+    border-top: 1px solid var(--border-subtle);
+    flex-shrink: 0;
+}
+
+.pdf-page-number {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+}
+
+/* ---- Scrollbar for page area ---- */
+.pdf-page-area::-webkit-scrollbar {
+    width: 8px;
+}
+
+.pdf-page-area::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.pdf-page-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.pdf-page-area::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+.pdf-viewer-report {
+    margin-inline-start: auto;
+    padding: 2px 8px;
+    border: 0;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-tertiary);
+    font-size: 0.72rem;
+    cursor: pointer;
+    text-decoration: underline dotted;
+}
+
+.pdf-viewer-report:hover {
+    color: var(--text-primary);
+    background: var(--accent-muted);
+}

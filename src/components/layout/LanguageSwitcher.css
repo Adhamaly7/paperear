@@ -1,0 +1,36 @@
+.lang-switcher-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-primary);
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.lang-switcher-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-subtle);
+}
+
+.lang-switcher-btn:active {
+  transform: translateY(1px);
+}
+
+.lang-switcher-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+[data-theme='midnight'] .lang-switcher-icon,
+[data-theme='dusk'] .lang-switcher-icon {
+  filter: invert(1) brightness(0.9);
+}

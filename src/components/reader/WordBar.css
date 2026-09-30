@@ -1,0 +1,105 @@
+.wordbar {
+    position: fixed;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 4px;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    background: var(--bg-secondary);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+    animation: wordbar-in var(--duration-fast) ease;
+}
+
+@keyframes wordbar-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.wordbar-btn {
+    min-width: 36px;
+    height: 32px;
+    padding: 0 var(--space-2);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+
+.wordbar-btn:hover {
+    background: var(--accent-muted);
+    color: var(--text-primary);
+}
+
+.wordbar-btn--play {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+.wordbar-btn--play .busy__dots {
+    width: 1.2em;
+}
+
+.wordbar-btn--flag:hover,
+.wordbar-btn--active {
+    color: #ff6b6b;
+}
+
+.wordbar-btn--missing {
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1;
+    padding-bottom: 3px;
+}
+
+.wordbar-btn--missing:hover {
+    color: var(--accent-primary);
+}
+
+.wordbar-note {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-width var(--duration-fast) ease, opacity var(--duration-fast) ease, margin var(--duration-fast) ease;
+}
+
+.wordbar--note-open .wordbar-note {
+    max-width: 360px;
+    opacity: 1;
+    margin-inline-start: 6px;
+    padding-inline-start: 6px;
+    border-inline-start: 1px solid var(--border-default);
+}
+
+.wordbar-note-input {
+    width: 220px;
+    height: 32px;
+    padding: 0 var(--space-2);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    background: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    outline: none;
+}
+
+.wordbar-note-input:focus {
+    border-color: var(--accent-primary);
+}
+
+.wordbar-btn--collapse {
+    min-width: 32px;
+    font-size: 0.75rem;
+}
+
+[dir="rtl"] .wordbar-btn--collapse {
+    transform: scaleX(-1);
+}

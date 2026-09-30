@@ -1,0 +1,133 @@
+/* DocumentScroll — virtualized real-page scroll (document mode) */
+
+.doc-scroll__wrap {
+    position: relative;
+}
+
+.doc-scroll__zoom {
+    position: absolute;
+    top: 10px;
+    right: 22px;
+    z-index: 5;
+    display: flex;
+    gap: 4px;
+}
+
+.doc-scroll__zoom-btn {
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid rgba(120, 120, 130, 0.35);
+    background: rgba(0, 0, 0, 0.45);
+    color: #ddd;
+}
+
+.doc-scroll__zoom-btn.is-active {
+    background: var(--accent, #5b7cfa);
+    border-color: var(--accent, #5b7cfa);
+    color: #fff;
+}
+
+.doc-scroll {
+    position: relative;
+    height: calc(100dvh - var(--dock-h, 150px) - 84px);
+    overflow: auto;
+    overscroll-behavior-x: contain;
+    border-radius: 8px;
+    background: var(--doc-scroll-bg, rgba(0, 0, 0, 0.06));
+    padding: 4px;
+}
+
+.doc-scroll__spacer {
+    position: relative;
+    width: 100%;
+}
+
+.doc-scroll__slot {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.doc-scroll__loading {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--doc-scroll-dim, rgba(120, 120, 130, 0.6));
+    font-size: 1.4rem;
+}
+
+.doc-scroll__pagenum {
+    position: absolute;
+    left: 10px;
+    bottom: 6px;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    pointer-events: none;
+}
+
+.doc-scroll.is-pannable {
+    cursor: grab;
+}
+
+.doc-scroll.is-pannable:active {
+    cursor: grabbing;
+}
+
+.doc-scroll__zoom-sep {
+    width: 1px;
+    background: rgba(120, 120, 130, 0.35);
+    margin: 0 3px;
+}
+
+.doc-scroll__report {
+    font-size: 0.72rem;
+    text-decoration: underline dotted;
+    opacity: 0.8;
+}
+
+.doc-scroll__where {
+    position: absolute;
+    top: 46px;
+    right: 22px;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    background: rgba(0, 0, 0, 0.55);
+    color: #eee;
+}
+
+.doc-scroll__where input {
+    width: 3.2em;
+    text-align: center;
+    font: inherit;
+    padding: 1px 4px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+}
+
+.doc-scroll__slot.is-unloaded {
+    cursor: pointer;
+}
+
+.doc-scroll__slot.is-unloaded .page-overlay__word {
+    pointer-events: none;
+}
+
+.doc-scroll,
+.doc-scroll .page-overlay {
+    direction: ltr;
+}
