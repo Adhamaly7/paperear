@@ -215,7 +215,7 @@ export default function PolicyPage() {
                 </section>
             ))}
             <footer className="policy__footer">
-                <a href="https://github.com/Adhamaly7/paperear" target="_blank" rel="noopener noreferrer">github.com/Adhamaly7/paperear</a>
+                <a href="https://github.com/theadhamaly/paperear" target="_blank" rel="noopener noreferrer">github.com/theadhamaly/paperear</a>
                 <a href="/third-party-notices.txt" target="_blank" rel="noopener">{lang === 'ar' ? 'تراخيص الأطراف الأخرى' : 'Third-party licences'}</a>
             </footer>
         </div>

@@ -15,7 +15,7 @@ I will confirm that I have your report, keep you updated, and tell you when it i
 In scope:
 
 - The web app at [paperear.app](https://paperear.app).
-- The public repository at [github.com/Adhamaly7/paperear](https://github.com/Adhamaly7/paperear).
+- The public repository at [github.com/theadhamaly/paperear](https://github.com/theadhamaly/paperear).
 
 Only the current version of the web app and the main branch of the repository are supported.
 
